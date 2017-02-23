@@ -1,0 +1,21 @@
+{
+  "name": "taskcluster-lint",
+  "version": "1.0.0",
+  "description": "Lint a taskcluster project to ensure it's in good state",
+  "main": "index.js",
+  "scripts": {
+    "compile": "babel-compile -p taskcluster src:lib src/rules:lib/rules",
+    "postinstall": "npm run compile",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Ford <jhford@mozilla.com>",
+  "license": "MPL-2.0",
+  "dependencies": {
+    "babel-compile": "^2.0.0",
+    "babel-preset-taskcluster": "^3.0.0",
+    "babel-runtime": "^6.23.0",
+    "latest-version": "^3.0.0",
+    "semver": "^5.3.0",
+    "source-map-support": "^0.4.11"
+  }
+}
