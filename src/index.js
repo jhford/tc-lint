@@ -49,11 +49,18 @@ class TCLint {
 
   async lint() {
     let results = await Promise.all(this.linters.map(linter => linter.runCheck()));
+    let failures = results.filter(x => !x.outcome && x.severity === 'error');
     results.forEach(result => {
       console.log(`${result.code}: ${result.outcome ? 'passed' : 'failed'} -- ${result.message}`);
     });
-  }
+    if (failures.length > 0) {
+      let err = new Error('Failures!');
+      err.results = results;
+      err.failures = failures;
+      throw err;
+    }
 
+  }
 }
 
 if (!module.parent) {
